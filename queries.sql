@@ -66,3 +66,6 @@ FROM Song s
 SELECT s.Title 'Song Title', MAX(s.SongLength) 'Song Length', a.Title 'Album'
 FROM  Album a, Song s
 WHERE s.AlbumId = a.AlbumId
+
+
+
