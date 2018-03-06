@@ -1,0 +1,17 @@
+{
+    "name": "node-diceroll",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "bin": {
+        "diceroll": "bin/diceroll"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "read-file": "node index.js",
+        "start": "nodemon bin/diceroll"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

@@ -20,15 +20,41 @@ INSERT INTO "Album" ("Title", "ReleaseDate", "AlbumLength", "Label", "ArtistId",
 -- Using the INSERT statement, add some songs that are on that album to the Song table.
 
 INSERT INTO "Song" ("Title", "SongLength", "ReleaseDate", "GenreId", "ArtistId", "AlbumId")
- VALUES ( "Bigger than my body", 413, 2004, 3, 32, 29);
+SELECT  "Bigger than my body", 413, 2004, g.GenreId, ar.ArtistId, al.AlbumId
+FROM Artist ar, Genre g, Album al
+WHERE ar.ArtistName = "John Mayer"
+and g.label = "Rock"
+and al.Title = "Heavier Things"
+
+-- OLD VERSION of above
+-- INSERT INTO "Song" ("Title", "SongLength", "ReleaseDate", "GenreId", "ArtistId", "AlbumId")
+--  VALUES ( "Bigger than my body", 413, 2004, 3, 32, 29);
 
 -- Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added. Here is some more info on joins that might help.
 
-SELECT a.Title, s.Title, art.ArtistName
+SELECT a.Title as albumTItle, s.Title as songTitle, art.ArtistName as Artist
 FROM Album a 
-LEFT JOIN Song s ON s.AlbumId = a.AlbumId
-LEFT JOIN Artist art ON art.ArtistId = a.ArtistId
+LEFT JOIN Song s 
+ON s.AlbumId = a.AlbumId
+LEFT JOIN Artist art 
+ON art.ArtistId = a.ArtistId
 WHERE a.Title = "Heavier Things"
+
+-- Second option (TIM)
+SELECT a.Title, s.Title, art.ArtistName
+FROM song s 
+LEFT JOIN album a
+ON s.AlbumId = a.AlbumId
+LEFT JOIN Artist art ON art.ArtistId = a.ArtistId
+WHERE s.albumid = (SELECT AlbumId FROM album where title="Heavier Things")
+
+-- Third Option (JOE)
+SELECT a.Title, s.Title, art.ArtistName
+FROM Artist art 
+LEFT JOIN album a
+ON a.artistId = art.artistId
+LEFT JOIN Song s ON a.AlbumId = s.AlbumId
+WHERE art.ArtistName = "John Mayer"
 
 -- Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
 
@@ -36,6 +62,16 @@ SELECT a.Title, COUNT(s.AlbumId)
 FROM Album a, Song s
 WHERE s.AlbumID = a.AlbumID
 GROUP BY a.Title
+
+-- Second option (TREY & JOE)
+-- JOIN goes hand in hand with ON
+-- WHERE is used as a filter (above example)
+
+SELECT count(song.songid) "Song Count", album.title "Album"
+FROM song
+JOIN Album
+ON song.albumid = album.AlbumId
+GROUP BY album.title
 
 -- Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
 
