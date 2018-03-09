@@ -16,3 +16,12 @@ module.exports = (args) => {
     }
     return diceObj;
 }
+
+// Another way to do the if statements (with a terinary statement)
+
+// module.exports = ([num, sides]) => {
+    // const dieNums = {};
+    // dieNums.count = sides ? num : 1;
+    // dieNums.sides = sides || num || 6;
+    // return dieNums
+// }
