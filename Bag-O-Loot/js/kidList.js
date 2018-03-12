@@ -4,3 +4,6 @@ const db = new sqlite3.Database('bag-o-loot.sqlite', (err) => {
     console.log("Connection to db successful");
 });
 
+module.exports.getKidList = () => {
+    
+}
