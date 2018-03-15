@@ -50,6 +50,28 @@ app.get('/see-eggs', (req, res) => {
     req.setEgg;
 });
 
+// Error middlewares need to be the last items
+app.use( (req, res, next) => {
+    let err = new Error("Page not found");
+    err.status = 404;
+    res.send(`<h4> Sorry that page could not be found </h4>`);
+})
+
+
+app.use( (req, res, next,) => {
+    let err = new Error('Not found, friend');
+    err.status = 404;
+    next(err);
+})
+
+app.use( (err, req, res, next) => {
+    // one error handler to rule them all
+    res.json({
+        "message": "You blew it",
+        "err": err.message
+    });
+});
+
 
 
 app.listen(8080, () => {
