@@ -1,6 +1,7 @@
 const express = require('express');
 const appRoutes = require('./routes/appRoutes');
 const app = express();
+const routes = ('./routes/');
 
 const currentTime = ( req, res, next ) => {
     let date = new Date();
@@ -36,6 +37,8 @@ b, "Y88ba,_         ""Y888baa,_         ,8"
 app.use(currentTime);
 app.use(setEgg);
 
+
+// app.use('/', routes);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
